@@ -177,7 +177,7 @@
     </div>
 
     <div id="app-screen">
-        <div class="author-header">Author: DERER LIN (v5.0 - Date Fix)</div>
+        <div class="author-header">Author: DERER LIN (v5.0 - Final Consistent)</div>
         <div class="header">
             <div style="width: 36px;"></div> 
             <div class="header-title"><h2>CT Machine-NG<br>裁斷機械故障資訊</h2></div>
@@ -438,19 +438,45 @@
         }).catch(e=>{listContainer.innerHTML='<p style="text-align: center; color: red;">❌ 載入失敗。</p>'})
     }
 
+    // 🔴 修正後的 populateForm：回填資料時強制轉換日期格式
     function populateForm(f){
-        if(!confirm(`回填單號 [${f}]?`))return;showStatus('loading','Loading...',f);
-        fetch(`${GAS_URL}?action=getRow&formNo=${encodeURIComponent(f)}`).then(r=>r.json()).then(res=>{
+        if(!confirm(`回填單號 [${f}]?`)) return;
+        showStatus('loading','Loading...',f);
+        
+        fetch(`${GAS_URL}?action=getRow&formNo=${encodeURIComponent(f)}`)
+        .then(r=>r.json())
+        .then(res=>{
             if(res.result==='success'){
-                const d=res.data;processedImageBase64="";document.getElementById('preview-img').style.display='none';document.querySelector('.placeholder').style.display='block';
-                document.getElementById('input-employee-id').value=d.employeeId;document.getElementById('input-machine').value=d.machine;
-                document.getElementById('input-form-no').value=d.formNo;document.getElementById('input-stop-time-full').value=d.stopTimeFull?d.stopTimeFull.trim():"";
-                document.getElementById('input-start-time-full').value=d.startTimeFull?d.startTimeFull.trim():"";document.getElementById('input-concern-section').value=d.concernSection;
-                document.getElementById('input-reason').value=d.reason;document.getElementById('input-solution').value=d.solution;document.getElementById('input-self-actions').value=d.selfActions;
-                calculateTotalStopTime();showStatus('success','Loaded','');setTimeout(closeStatusModal,1000)
-            }else{showStatus('error','Failed',res.error)}
+                const d=res.data;
+                processedImageBase64="";
+                document.getElementById('preview-img').style.display='none';
+                document.querySelector('.placeholder').style.display='block';
+                
+                document.getElementById('input-employee-id').value=d.employeeId;
+                document.getElementById('input-machine').value=d.machine;
+                document.getElementById('input-form-no').value=d.formNo;
+
+                // 強制格式化日期
+                const stopObj = parseCustomDateTime(d.stopTimeFull);
+                document.getElementById('input-stop-time-full').value = stopObj ? getFullDateTimeString(stopObj) : (d.stopTimeFull || "");
+
+                const startObj = parseCustomDateTime(d.startTimeFull);
+                document.getElementById('input-start-time-full').value = startObj ? getFullDateTimeString(startObj) : (d.startTimeFull || "");
+
+                document.getElementById('input-concern-section').value=d.concernSection;
+                document.getElementById('input-reason').value=d.reason;
+                document.getElementById('input-solution').value=d.solution;
+                document.getElementById('input-self-actions').value=d.selfActions;
+                
+                calculateTotalStopTime(); // 重新計算
+                showStatus('success','Loaded','');
+                setTimeout(closeStatusModal,1000)
+            } else {
+                showStatus('error','Failed',res.error)
+            }
         }).catch(e=>showStatus('error','Error','Network'))
     }
+
     function triggerFile(id){document.getElementById(id).click()}
     function handleFile(i){if(i.files[0]){showStatus('loading','Processing...','');const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>processImageWithCanvas(img);img.src=e.target.result};r.readAsDataURL(i.files[0])}}
     function processImageWithCanvas(img){const c=document.createElement('canvas');let w=img.width;let h=img.height;if(w>MAX_IMAGE_WIDTH){h=Math.round(h*(MAX_IMAGE_WIDTH/w));w=MAX_IMAGE_WIDTH}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);processedImageBase64=c.toDataURL('image/jpeg',0.8);document.getElementById('preview-img').src=processedImageBase64;document.getElementById('preview-img').style.display='block';document.querySelector('.placeholder').style.display='none';closeStatusModal()}
