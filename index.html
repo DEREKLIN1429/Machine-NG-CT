@@ -15,7 +15,6 @@
             background-color: var(--bg-color); margin: 0; padding: 0;
             display: flex; justify-content: center; min-height: 100vh;
         }
-        /* Modal Styles */
         #status-modal, #settings-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 9999;
@@ -36,8 +35,6 @@
             margin: 0 auto 15px auto;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* App Container */
         #app-screen { width: 100%; max-width: 500px; padding: 10px; box-sizing: border-box; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .header-btn { 
@@ -46,13 +43,8 @@
             display: flex; align-items: center; justify-content: center;
         }
         .header-title h2 { margin: 0; color: #333; font-size: 1.2rem; line-height: 1.4; }
-        .author-header { font-size: 0.8rem; color: #888; text-align: center; margin-bottom: 5px; }
-        
-        /* Cards */
         .card { background: var(--card-bg); padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 12px; }
         .section-title { font-weight: bold; color: #555; margin-bottom: 8px; display: block; font-size: 1rem; }
-        
-        /* Photo Section */
         .photo-controls { display: flex; gap: 10px; margin-bottom: 10px; }
         .btn-half { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; gap: 5px;}
         .btn-cam { background-color: #FF5722; color: white; } 
@@ -65,8 +57,6 @@
         #preview-container .placeholder { position: absolute; color: #666; font-size: 1.1em; font-weight: bold; text-align: center; }
         #preview-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: cover; display: none; }
         #ratio-display-tag { position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.6); color: white; padding: 2px 5px; border-radius: 4px; font-size: 0.7rem; z-index: 10; }
-        
-        /* Inputs */
         .input-group { margin-bottom: 8px; display: flex; flex-direction: column; }
         .input-label { font-weight: bold; font-size: 0.9rem; color: #333; margin-bottom: 4px; }
         .text-input, textarea, select.text-input { 
@@ -74,8 +64,6 @@
             border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.3s;
         }
         textarea { height: 80px; resize: vertical; } 
-        
-        /* Time Section */
         .time-component { display: flex; flex-direction: column; margin-bottom: 8px; }
         .time-input-row { display: flex; align-items: center; gap: 5px; }
         .btn-update-time { padding: 10px 12px; border: none; background-color: #00bcd4; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; line-height: 1; }
@@ -85,13 +73,6 @@
         .total-time-input-group .btn-calc { padding: 10px; background: #607D8B; color: white; border: none; border-radius: 6px; cursor: pointer; }
         .total-time-input-group #total-time-unit { width: 75px !important; }
         
-        /* Voice Button */
-        .voice-control-group { margin-top: 5px; }
-        .btn-voice { width: 100%; padding: 8px; border: none; border-radius: 6px; background-color: #eee; color: #333; font-weight: bold; cursor: pointer; transition: background 0.3s; }
-        .btn-voice.recording { background-color: var(--danger-color); color: white; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
-
-        /* Footer Buttons */
         .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; padding-bottom: 20px; }
         .btn-main { 
             width: 100%; aspect-ratio: 5 / 4; padding: 5px; border: none; border-radius: 8px; 
@@ -103,7 +84,6 @@
         .btn-save { background-color: var(--primary-color); } .btn-copy { background-color: var(--copy-color); }
         .btn-view { background-color: #03A9F4; } .btn-drive { background-color: #795548; }
 
-        /* Recent Records */
         #recent-records-container { margin-top: 20px; padding: 15px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         #recent-records-container h4 {
             margin: 0 0 10px 0; color: var(--view-color); border-bottom: 1px solid #eee; padding-bottom: 8px;
@@ -117,10 +97,12 @@
         .record-item .details { font-size: 0.85rem; color: #777; text-align: right; line-height: 1.4; width: 55%; }
         .hidden { display: none !important; }
         
-        .btn-add-item { background: #4CAF50; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-bottom: 10px; }
+        .btn-voice.recording { background-color: var(--danger-color); color: white; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
+    
     <div id="status-modal" style="display: none;">
         <div class="modal-box">
             <div id="status-spinner" class="spinner"></div>
@@ -176,11 +158,10 @@
         </div>
     </div>
 
-    <div id="app-screen">
-        <div class="author-header">Author: DERER LIN (v5.0 - Final Consistent)</div>
+    <div id="app-screen" style="display: none;">
+        <div class="author-header">Author: DERER LIN (v5.1 - Date Sort Fixed)</div>
         <div class="header">
-            <div style="width: 36px;"></div> 
-            <div class="header-title"><h2>CT Machine-NG<br>裁斷機械故障資訊</h2></div>
+            <div style="width: 36px;"></div> <div class="header-title"><h2>Machine-NG MX<br>裁斷機械故障資訊</h2></div>
             <div class="header-btn" onclick="openSettings()" title="Settings">⚙️</div>
         </div>
         <div class="input-group">
@@ -216,7 +197,6 @@
 
             <div class="input-group"><label class="input-label">Machine :</label><select id="input-machine" class="text-input"></select></div>
             <div class="input-group"><label class="input-label">Repair Form No:</label><input type="text" id="input-form-no" class="text-input" placeholder="e.g. A69304"></div>
-            
             <div class="time-component">
                 <label class="input-label">Stop time : (DD/MM/YYYY hh:mm) (IST)</label>
                 <div class="time-input-row">
@@ -231,7 +211,6 @@
                     <button type="button" class="btn-update-time" onclick="updateSingleTime('input-start-time-full')"><span style="font-size: 1.1em;">⏱️</span></button>
                 </div>
             </div>
-            
             <div class="input-group">
                 <label class="input-label">Total stop time :</label>
                 <div class="total-time-input-group">
@@ -256,7 +235,7 @@
         </div>
 
         <div id="recent-records-container" class="card">
-            <h4>最近紀錄 (Recent Records)</h4> <div id="recent-records-list"><p style="text-align: center; color: #999;">Loading recent records...</p></div>
+            <h4>最近紀錄 (Recent Records - Date Sort)</h4> <div id="recent-records-list"><p style="text-align: center; color: #999;">Loading recent records...</p></div>
         </div>
         
         <div class="footer-btns">
@@ -300,11 +279,13 @@
         document.getElementById('total-time-unit').value = "min"; 
         
         document.getElementById('app-screen').style.display = 'block';
-        applySettings(); loadRecentRecords();
+        applySettings(); 
+        loadRecentRecords();
     }
 
     function openSettings(){document.getElementById('settings-modal').style.display='flex';renderConcernListSettings();renderMachineListSettings();}
     function closeSettings(){document.getElementById('settings-modal').style.display='none'}
+    
     function saveSettings(){
         const t=parseFloat(document.getElementById('set-timeout').value);if(!isNaN(t))localStorage.setItem("cfg_timeout",t);
         const limit = parseInt(document.getElementById('set-recent-limit').value);
@@ -347,55 +328,51 @@
     function saveEmployeeID(){const v=document.getElementById('input-employee-id').value.trim();if(v)localStorage.setItem(EMPLOYEE_ID_KEY,v)}
     
     // ====================================================================
-    // ⬇️ 日期時間核心修復區域 (已解決 Invalid Format 問題)
+    // ⬇️ 日期時間核心修復區域 (解決 Invalid Format 與 格式不一致問題)
     // ====================================================================
 
-    // 1. 解析函數：聰明判斷 YYYY/MM/DD 或 DD/MM/YYYY，並容忍秒數
-    function parseCustomDateTime(dtStr) {
-        if (!dtStr) return null;
-        let s = dtStr.trim();
-        s = s.replace(/-/g, '/'); // 將 - 統一轉為 /
-
-        let day, month, year, hour, minute;
-
-        // 嘗試匹配 DD/MM/YYYY HH:mm
-        let matchDMY = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})(?::\d{2})?$/);
-        // 嘗試匹配 YYYY/MM/DD HH:mm
-        let matchYMD = s.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})(?::\d{2})?$/);
-
-        if (matchDMY) {
-            day = parseInt(matchDMY[1], 10);
-            month = parseInt(matchDMY[2], 10) - 1;
-            year = parseInt(matchDMY[3], 10);
-            hour = parseInt(matchDMY[4], 10);
-            minute = parseInt(matchDMY[5], 10);
-        } else if (matchYMD) {
-            year = parseInt(matchYMD[1], 10);
-            month = parseInt(matchYMD[2], 10) - 1;
-            day = parseInt(matchYMD[3], 10);
-            hour = parseInt(matchYMD[4], 10);
-            minute = parseInt(matchYMD[5], 10);
-        } else {
-            let tryDate = new Date(s);
-            if (!isNaN(tryDate)) return tryDate;
-            return null;
-        }
-
-        const date = new Date(year, month, day, hour, minute);
-        if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) return null;
-        return date;
-    }
-
-    // 2. 顯示函數：確保按鈕產生的格式一致 (DD/MM/YYYY HH:mm)
+    // 1. 產生標準格式字串 (給按鈕用) -> 強制輸出 DD/MM/YYYY HH:mm (IST時間)
     function getFullDateTimeString(dateObj) {
+        // 先轉成 UTC
         const utc = dateObj.getTime() + (dateObj.getTimezoneOffset() * 60000);
-        const istDate = new Date(utc + (3600000 * 5.5));
+        // 再轉成 IST (UTC + 5.5)
+        const istDate = new Date(utc + (3600000 * 5.5)); 
+        
         const day = String(istDate.getDate()).padStart(2, '0');
         const month = String(istDate.getMonth() + 1).padStart(2, '0');
         const year = istDate.getFullYear();
         const hour = String(istDate.getHours()).padStart(2, '0');
         const minute = String(istDate.getMinutes()).padStart(2, '0');
+        
+        // 嚴格標準格式: DD/MM/YYYY HH:mm
         return `${day}/${month}/${year} ${hour}:${minute}`;
+    }
+
+    // 2. 智慧解析函數：同時支援 DD/MM/YYYY 和 YYYY/MM/DD
+    function parseCustomDateTime(dtStr) {
+        if (!dtStr) return null;
+        let s = dtStr.trim();
+        s = s.replace(/-/g, '/').replace('T', ' '); // 將 - 轉為 /，T 轉為空格 (相容 ISO)
+
+        // 嘗試匹配格式 A: DD/MM/YYYY HH:mm (標準前端格式)
+        // 邏輯: 日/月/年 (年是4位數在最後)
+        let dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})(?::\d{2})?$/);
+        
+        // 嘗試匹配格式 B: YYYY/MM/DD HH:mm (標準後端格式)
+        // 邏輯: 年/月/日 (年是4位數在最前)
+        let ymd = s.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{2})(?::\d{2})?$/);
+
+        if (dmy) {
+            // DD/MM/YYYY -> new Date(year, month-1, day, ...)
+            return new Date(parseInt(dmy[3]), parseInt(dmy[2])-1, parseInt(dmy[1]), parseInt(dmy[4]), parseInt(dmy[5]));
+        } else if (ymd) {
+            // YYYY/MM/DD -> new Date(year, month-1, day, ...)
+            return new Date(parseInt(ymd[1]), parseInt(ymd[2])-1, parseInt(ymd[3]), parseInt(ymd[4]), parseInt(ymd[5]));
+        } else {
+            // 嘗試系統原生解析
+            let d = new Date(s);
+            return isNaN(d) ? null : d;
+        }
     }
 
     // ====================================================================
@@ -418,7 +395,7 @@
         t.value = u === 'h' ? (diff/60).toFixed(2) + " hr" : diff + " min";
         t.style.background='#e6ffed';
     }
-
+    
     function updateSingleTime(id){const n=new Date();document.getElementById(id).value=getFullDateTimeString(n);calculateTotalStopTime()}
     
     function loadRecentRecords(){
@@ -428,7 +405,15 @@
         fetch(`${GAS_URL}?action=loadRecords`).then(r=>r.json()).then(res=>{
             listContainer.innerHTML='';
             if(res.result==='success'&&res.data.length>0){
-                const recordsToShow = res.data.slice(0, limit);
+                // ⚠️ 修改：增加日期排序邏輯 (Desc: Newest First)
+                // 使用 parseCustomDateTime 解析時間並進行比對
+                const sortedData = res.data.sort((a, b) => {
+                    const dateA = parseCustomDateTime(a.stopTimeFull) || new Date(0); // 若無效日期視為最舊
+                    const dateB = parseCustomDateTime(b.stopTimeFull) || new Date(0);
+                    return dateB - dateA; // 降冪：時間晚(大)的排前面
+                });
+
+                const recordsToShow = sortedData.slice(0, limit);
                 recordsToShow.forEach(r=>{
                     const i=document.createElement('div');i.className='record-item';i.setAttribute('onclick',`populateForm('${r.formNo}')`);
                     i.innerHTML=`<div class="main-info-group"><span class="form-no-display">#${r.formNo||'N/A'}</span><span class="stop-time-display">🛑 ${r.stopTime||"No Stop Time"}</span></div><div class="details"><div>${r.machine||'N/A'} (${r.concernSection||'N/A'})</div><div>${r.startTime?'Start: '+r.startTime:''}</div></div>`;
@@ -438,14 +423,10 @@
         }).catch(e=>{listContainer.innerHTML='<p style="text-align: center; color: red;">❌ 載入失敗。</p>'})
     }
 
-    // 🔴 修正後的 populateForm：回填資料時強制轉換日期格式
+    // 🔴 修正：強制轉換並統一回填的時間格式
     function populateForm(f){
-        if(!confirm(`回填單號 [${f}]?`)) return;
-        showStatus('loading','Loading...',f);
-        
-        fetch(`${GAS_URL}?action=getRow&formNo=${encodeURIComponent(f)}`)
-        .then(r=>r.json())
-        .then(res=>{
+        if(!confirm(`回填單號 [${f}]?`))return;showStatus('loading','Loading...',f);
+        fetch(`${GAS_URL}?action=getRow&formNo=${encodeURIComponent(f)}`).then(r=>r.json()).then(res=>{
             if(res.result==='success'){
                 const d=res.data;
                 processedImageBase64="";
@@ -456,7 +437,7 @@
                 document.getElementById('input-machine').value=d.machine;
                 document.getElementById('input-form-no').value=d.formNo;
 
-                // 強制格式化日期
+                // 強制轉換為 DD/MM/YYYY HH:mm
                 const stopObj = parseCustomDateTime(d.stopTimeFull);
                 document.getElementById('input-stop-time-full').value = stopObj ? getFullDateTimeString(stopObj) : (d.stopTimeFull || "");
 
@@ -468,12 +449,10 @@
                 document.getElementById('input-solution').value=d.solution;
                 document.getElementById('input-self-actions').value=d.selfActions;
                 
-                calculateTotalStopTime(); // 重新計算
+                calculateTotalStopTime();
                 showStatus('success','Loaded','');
                 setTimeout(closeStatusModal,1000)
-            } else {
-                showStatus('error','Failed',res.error)
-            }
+            }else{showStatus('error','Failed',res.error)}
         }).catch(e=>showStatus('error','Error','Network'))
     }
 
@@ -613,18 +592,7 @@ ${action}`;
         const d={image:processedImageBase64,employeeId:document.getElementById('input-employee-id').value,machine:document.getElementById('input-machine').value,stopTimeFull:document.getElementById('input-stop-time-full').value,startTimeFull:document.getElementById('input-start-time-full').value,formNo:document.getElementById('input-form-no').value,reason:document.getElementById('input-reason').value,concernSection:document.getElementById('input-concern-section').value,solution:document.getElementById('input-solution').value,selfActions:document.getElementById('input-self-actions').value,folderId:FIXED_FOLDER_ID};
         if(!d.formNo){alert("Form No required");return}
         saveEmployeeID();showStatus('loading','Uploading...','');
-        
-        fetch(GAS_URL,{
-            method:'POST',
-            body:JSON.stringify(d)
-        })
-        .then(r=>r.json())
-        .then(res=>{
-            if(res.result==='success'){showStatus('success','Saved!',res.action);clearInputs();loadRecentRecords();setTimeout(closeStatusModal,2000)}
-            else{showStatus('error','Failed',res.error)}
-        })
-        .catch(e=>showStatus('error','Error',e.message))
-        .finally(()=>document.getElementById('saveBtn').disabled=false);
+        fetch(GAS_URL,{method:'POST',body:JSON.stringify(d)}).then(r=>r.json()).then(res=>{if(res.result==='success'){showStatus('success','Saved!',res.action);clearInputs();loadRecentRecords();setTimeout(closeStatusModal,2000)}else{showStatus('error','Failed',res.error)}}).catch(e=>showStatus('error','Error',e.message)).finally(()=>document.getElementById('saveBtn').disabled=false);
     }
 </script>
 </body>
